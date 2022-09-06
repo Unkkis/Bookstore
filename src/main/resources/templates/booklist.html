@@ -2,16 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
      <meta charset="UTF-8" />
+      <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
 <h1>Booklist</h1>
-<table>
+<table class="table table-striped">
 		<tr>
 		    <th>Author</th>
 		    <th>Title</th>
 		    <th>Year</th>
 		    <th>ISBN</th>
 		    <th>Price</th>
+		    <th colspan="2"></th>
 		</tr>
         <tr th:each="book : ${books}">
         	<td th:text="${book.author}"></td>
@@ -19,10 +21,10 @@
             <td th:text="${book.bookYear}"></td>
             <td th:text="${book.isbn}"></td>
             <td th:text="${book.price}"></td>
-            <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
-             <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+            <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+             <td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a></td>
         </tr>
 </table>
-<a href="/add" class="btn btn-primary">Add new Book</a>
+<a href="/add" class="btn btn-success">Add new Book</a>
 </body>
 </html>
