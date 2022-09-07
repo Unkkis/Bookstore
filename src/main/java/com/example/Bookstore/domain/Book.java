@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -11,12 +13,31 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String title, author, bookYear, isbn, price;
+	private String title, author, isbn;
+	private double price;
+	private int bookYear;
+	
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;
 
 	public Book() {
 	}
 
-	public Book(String title, String author, String bookYear, String isbn, String price) {
+
+	public Book(String title, String author, int bookYear, String isbn, double price, Category category) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.isbn = isbn;
+		this.price = price;
+		this.bookYear = bookYear;
+		this.category = category;
+	}
+
+
+
+	public Book(String title, String author, int bookYear, String isbn, double price) {
 		super();
 		this.title = title;
 		this.author = author;
@@ -49,11 +70,11 @@ public class Book {
 		this.author = author;
 	}
 
-	public String getBookYear() {
+	public int getBookYear() {
 		return bookYear;
 	}
 
-	public void setBookYear(String bookYear) {
+	public void setBookYear(int bookYear) {
 		this.bookYear = bookYear;
 	}
 
@@ -65,18 +86,25 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	public Category getCategory() {
+		return category;
+	}
 
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", bookYear=" + bookYear + ", isbn="
-				+ isbn + ", price=" + price + "]";
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", price=" + price
+				+ ", bookYear=" + bookYear + ", category=" + category + "]";
 	}
 	
 
