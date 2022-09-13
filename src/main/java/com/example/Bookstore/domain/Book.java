@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Book {
@@ -13,8 +15,12 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String title, author, isbn;
+	@NotNull(message = "Pakollinen kenttä")
+	@Size(min=2, max=50)
+	private String title, author;
+	//@NotNull(message = "Pakollinen kenttä")
 	private double price;
+	private String isbn;
 	private int bookYear;
 	
 	@ManyToOne

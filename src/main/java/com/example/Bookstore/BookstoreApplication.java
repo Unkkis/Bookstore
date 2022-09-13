@@ -27,6 +27,7 @@ public class BookstoreApplication {
 		return (args) -> {
 			log.info("save couple of new books to DB");
 			
+			crepository.save(new Category(""));
 			crepository.save(new Category("Dekkari"));
 			crepository.save(new Category("Novelli"));
 			crepository.save(new Category("Dokumentti"));
