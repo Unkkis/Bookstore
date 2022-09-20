@@ -1,11 +1,15 @@
 package com.example.Bookstore.domain;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,11 +20,15 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@NotNull(message = "Pakollinen kenttä")
-	@Size(min=2, max=50)
+	@Size(min=2, max=50, message= "Syötä vähintään 2 ja enintään 50 merkkiä")
 	private String title, author;
-	//@NotNull(message = "Pakollinen kenttä")
+	@NotNull(message = "Pakollinen kenttä")
 	private double price;
+	@NotNull
 	private String isbn;
+	
+	@Min(value = 1800, message = "Oltava vähintään 1800")
+	@Max(value = 2024, message = "Oltava maksimissaan kuluva vuosi")
 	private int bookYear;
 	
 	@ManyToOne

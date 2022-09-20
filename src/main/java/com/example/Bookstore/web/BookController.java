@@ -39,7 +39,7 @@ public class BookController {
 	//add new book
 	@RequestMapping(value =("/add"))
 	public String addBook(Model model) {
-		model.addAttribute("books", new Book());
+		model.addAttribute("book", new Book());
 		model.addAttribute("categories", crepository.findAll());
 
 		return "addbook";
@@ -49,12 +49,9 @@ public class BookController {
 	@PostMapping(value ="/save")
 	public String save(@Valid Book book, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			model.addAttribute("books", book);
-			model.addAttribute("categories", crepository.findAll());
-			
-			System.out.println("Modelissa näkyy virheilmoitus:");
-			System.out.println(model.asMap());
-			
+		//	model.addAttribute("books", book);
+		//	model.addAttribute("categories", crepository.findAll());
+	
 			return "addbook";
 		}
 		

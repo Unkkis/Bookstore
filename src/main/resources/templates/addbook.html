@@ -9,8 +9,9 @@
 		<h1>Add new book</h1>
 	</div>
 	<div class="container">
- 		<form th:object="${books}" th:action="@{save}" action="#" method="post"> 
- 			<div class="form-group">
+ 		<form th:object="${book}" th:action="@{save}" action="#" method="post"> 
+ 		
+	<div class="form-group">
  				<label for="author">Author</label>
  				<input type="text" id="author" th:field="*{author}" class="form-control" autofocus="autofocus"/>
  				<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</span>
@@ -23,14 +24,17 @@
  			<div class="form-group">
  				<label for="bookYear">Year</label>
  				<input type="text" th:field="*{bookYear}" class="form-control"/>
+ 				<span th:if="${#fields.hasErrors('bookYear')}" th:errors="*{bookYear}">Error</span>
  			</div>
  			<div class="form-group">
  				<label for="isbn">ISBN</label>
  				<input type="text" th:field="*{isbn}" class="form-control"/>
+ 				<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">Error</span>
  			</div>
  			<div class="form-group">
  				<label for="price">Price</label>
  				<input type="text" th:field="*{price}" class="form-control"/>
+ 				<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</span>
  			</div>
  			<div class="form-group">
  				<label for="category">Books category</label>
@@ -38,7 +42,9 @@
  					<option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
  				</select>
  			</div>
+
  				<input type="submit" value="Save" class="btn btn-success"></input>
+
 		 </form>
 		 
 	</div>
