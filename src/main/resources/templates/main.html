@@ -9,7 +9,7 @@ xmlns:sec="http://www.thymelead.org/thymeleaf-extras-springsecurity5">
 
 <div class="container">
 	<div class="col text-center">
-		<h1>Tervetuloa kirjakauppaan</h1>
+		<h1>Tervetuloa kirjakauppaan [[${#httpServletRequest.remoteUser}]]</h1>
 	</div>
 </div>
 <div class="container">
