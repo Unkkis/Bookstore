@@ -3,6 +3,7 @@ package com.example.Bookstore.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,10 +27,17 @@ public class BookController {
 	@GetMapping("/index")
 	public String books(Model model) {
 		
-		return "index";
+		return "main";
 	}
 	
-	//list books , mainpage
+	//mainpage
+	@GetMapping(value = {"/", "/main"})
+	public String book(Model model) {
+		
+		return "main";
+	}
+	
+	//list books 
 	@RequestMapping(value = {"/", "/booklist", "/index"})
 	public String bookList(Model model) {
 		model.addAttribute("books", repository.findAll());
@@ -37,6 +45,7 @@ public class BookController {
 	}
 	
 	//add new book
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value =("/add"))
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
@@ -46,6 +55,7 @@ public class BookController {
 	}
 	
 	//save book
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping(value ="/save")
 	public String save(@Valid Book book, BindingResult result, Model model) {
 		if (result.hasErrors()) {
@@ -61,6 +71,7 @@ public class BookController {
 	}
 	
 	//delete book
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping(value="/delete/{id}")
 	public String deleteBook(@PathVariable("id")Long bookId) {
 		repository.deleteById(bookId);
@@ -68,6 +79,7 @@ public class BookController {
 	}
 	
 	//edit book
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value ="/edit/{id}")
 	public String addBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", repository.findById(bookId));

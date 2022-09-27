@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymelead.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8" />
+ <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+
+<div class="container">
+	<div class="col text-center">
+		<h1>Tervetuloa kirjakauppaan</h1>
+	</div>
+</div>
+<div class="container">
+<div class="col text-center">
+  <img src="/pictures/book.jpg" alt="books" style="width:50%;">
+</div>
+</div>
+<div class="container">
+	<div class="col text-center">
+		<a href="/booklist" class="btn btn-primary">Klikkaa tästä kirjalistaan</a>
+		<p></p>
+		<a href="/add" class="btn btn-primary"  sec:authorize="hasAuthority('ADMIN')">Tästä voit lisätä kirjan</a>
+	</div>
+</div>
+
+
+		<div class="container" >
+			<div class="col text-center">
+				<p></p>
+				<p></p>
+				<a href="/logout" class="btn btn-primary">Kirjaudu ulos</a>
+			</div>
+		</div>
+</body>
+</html>
