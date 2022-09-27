@@ -50,7 +50,7 @@ public class BookController {
 	public String save(@Valid Book book, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 		//	model.addAttribute("books", book);
-		//	model.addAttribute("categories", crepository.findAll());
+			model.addAttribute("categories", crepository.findAll());
 	
 			return "addbook";
 		}
