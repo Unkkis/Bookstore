@@ -24,15 +24,23 @@ public class WebSecurityConfig {
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		return http.authorizeRequests(auth -> {
 			auth.antMatchers("/css/**").permitAll();
+			auth.antMatchers("/h2-console").permitAll();
 			//hasRole is not working with H2
 			//auth.antMathers("/owners/**").hasRole("ADMIN")
 			auth.antMatchers("/main/**").permitAll();
 			auth.antMatchers("/add/**").hasAuthority("ADMIN");
 			auth.anyRequest().authenticated();
 		})
+				// below configuration is demanded if you want to use h2-console
+				.headers().frameOptions().disable().and()
+				// and this one for h2-console
+				.csrf().ignoringAntMatchers("/h2-console/**").and()
+				// tells where to go after successful login
 				.formLogin()
 				.defaultSuccessUrl("/main", true).and()
+				// Logout is permitted for all users
 				.logout().permitAll().and()
+				// and finally build this
 				.httpBasic(Customizer.withDefaults()).build();
 	}
 	
