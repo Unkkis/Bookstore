@@ -13,11 +13,14 @@ public class ApplicationUser {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String firstName, lastName;
+	@Column (name="firstname")
+	private String firstName;
+	@Column (name="lastname")
+	private String lastName;
 	private String role;
 	@Column(name = "username", nullable = false, unique = true)
 	private String username;
-	@Column(name = "password", nullable = false)
+	@Column(name = "password_hash", nullable = false)
 	private String passwordHash;
 	
 	public ApplicationUser(String firstName, String lastName, String role, String username, String passwordHash) {
